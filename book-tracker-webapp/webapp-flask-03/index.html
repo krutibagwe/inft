@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Progress Tracker</title>
+    <link rel="stylesheet" href="C:\Users\Kruti Bagwe\Desktop\flask web app2\static\style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Book Progress Tracker</h1>
+        <div id="book-form">
+            <label for="book-title">Book Title:</label>
+            <input type="text" id="book-title" required>
+            <label for="book-author">Author:</label>
+            <input type="text" id="book-author" required>
+            <label for="total-pages">Total Pages:</label>
+            <input type="number" id="total-pages" required>
+            <label for="pages-read">Pages Read:</label>
+            <input type="number" id="pages-read" required>
+            <button onclick="addBook()">Add Book</button>
+        </div>
+        <div id="book-list"></div>
+        <div id="completed-books">
+            <h2>Completed Books</h2>
+            <div id="completed-book-list"></div>
+        </div>
+        <div id="favorite-books">
+            <h2>Favorite Books</h2>
+            <div id="favorite-book-list"></div>
+        </div>
+        <button onclick="clearProgress()">Clear Progress</button>
+        <button onclick="window.location.href='/completed_books'">Completed Books</button>
+        <button onclick="window.location.href='/favorite_books'">Favorite Books</button>
+    </div>
+
+    <script src="C:\Users\Kruti Bagwe\Desktop\flask web app2\static\script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+body {
+    /*font-family: 'Times New Roman', Times, serif;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background: url('https://th.bing.com/th/id/R.7710d3b51edbcc6f89049de431d3034e?rik=29a8FKPQPEs6Tw&riu=http%3a%2f%2fforreadingaddicts.co.uk%2fwp-content%2fuploads%2f2017%2f02%2fbestselling-authors.jpg&ehk=djhrERh0QNW54CyL3okESCJ%2b2x04H9Ffo3exGAhop%2fU%3d&risl=&pid=ImgRaw&r=0') no-repeat center center fixed;
+*/
+
+font-family: 'Times New Roman', Times, serif;
+color: white;
+margin: 0 auto;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background: url('https://www.sebgorka.com/wp-content/uploads/2019/11/New-Collage-1024x1024.jpg') no-repeat center center fixed;
+background-size: cover;
+
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0,0.65);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    background-color: #4caf50;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+

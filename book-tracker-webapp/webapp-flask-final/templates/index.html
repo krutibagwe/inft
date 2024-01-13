@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Progress Tracker</title>
+    <link rel="stylesheet" href="C:\Users\Kruti Bagwe\Desktop\flask web app2\static\style.css">
+    <style>
+        .top-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #508c11;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            font-family: 'Times New Roman', Times, serif;
+            border-radius: 8px;
+        }
+
+        .top-button:hover {
+            background-color: #3a6c05;
+        }
+    </style>
+
+<style>
+    .button-two {
+        position: fixed;
+        top: 20px;
+        right: 200px;
+        background-color: #508c11;
+        color: white;
+        padding: 8px 16px; /* Adjusted padding for a smaller button */
+        text-decoration: none;
+        border-radius: 8px;
+    }
+
+    .button-two:hover {
+        background-color: #3a6c05;
+    }
+</style>
+
+</head>
+
+<body>
+    
+   
+    <div class="container">
+       <!-- <a class="top-button" href="https://www.goodreads.com/">Top books of the month</a> -->
+       <a class="top-button" href="https://i.pinimg.com/originals/12/04/96/12049644b6a4759447378b3bbc381aab.jpg">More Books to Read</a> 
+       <a class="button-two" href="author.html">Go to Authors Page</a>
+       <h1>Track your progress</h1>
+        <div id="book-form">
+            <label for="book-title">Book Title:</label>
+            <input type="text" id="book-title" required> <br>
+            <label for="book-author">Author:</label>
+            <input type="text" id="book-author" required> <br>
+            <label for="total-pages">Total Pages:</label>
+            <input type="number" id="total-pages" required> <br>
+            <label for="pages-read">Pages Read:</label>
+            <input type="number" id="pages-read" required> <br>
+
+
+            <button onclick="addBook()">Add Book</button> 
+        </div>
+        <div id="completed-books">
+            <hr><h2>Currently reading</h2> <hr>
+            <div id="current-book-list"></div>
+        </div>
+        <div id="book-list"></div>  <hr>
+        <div id="completed-books"> 
+            <h2>Completed Books</h2> <hr>
+            <div id="completed-book-list"></div>
+        </div> <hr>
+        <div id="favorite-books">
+            <h2>Favorite Books</h2> <hr>
+            <div id="favorite-book-list"></div>
+        </div> <br> <br>
+        <button onclick="clearProgress()">Clear Progress</button>
+        
+    </div>
+
+    <script src="C:\Users\Kruti Bagwe\Desktop\flask web app2\static\script.js"></script> 
+</body>
+
+</html>
