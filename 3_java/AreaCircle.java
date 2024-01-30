@@ -9,6 +9,6 @@ public class AreaCircle{
         System.out.println("Enter the radius of circle: ");
         double radius= scanner.nextDouble();
         double areacircle = calcAr(radius);
-        System.out.println("Area of circle is " + areacircle);
+        System.out.println("Area of the circle with radius " + radius " is " + areacircle);
     }
 }
