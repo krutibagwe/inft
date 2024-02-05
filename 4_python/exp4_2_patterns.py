@@ -6,14 +6,7 @@ i=1
 while i<6:
     print('*' * i)
     i+=1 
-
-==================== RESTART: C:/Users/SQL/Desktop/exp4_1.py ===================
-*
-**
-***
-****
-*****
->>>
+    
 
 #loops are used to print the above star pattern in reverse. The value of i was decremented after each iteration
 num = int(input("Enter the number: "))
