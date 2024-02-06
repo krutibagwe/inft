@@ -1,0 +1,26 @@
+num = int(input("enter the number: "))
+a=0
+b=1
+c=b
+count=1
+print("The Fibonacci series for {} numbers is: ".format(num))
+while count<=num:
+    print(a, end=" ")
+    count+=1
+    a=b
+    b=c
+    c=a+b
+
+
+num = int(input("enter the number: "))
+a=0
+b=1
+c=b
+count=1
+print("The Fibonacci series for {} numbers is: ".format(num))
+for i in range(num):
+    print(a, end=" ")
+    count+=1
+    a=b
+    b=c
+    c=a+b
