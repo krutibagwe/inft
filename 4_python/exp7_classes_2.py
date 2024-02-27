@@ -1,4 +1,3 @@
-'''
 #class variable 
 class Sample:
     x=10
@@ -66,7 +65,6 @@ p1 = Person("abc", 30, 15, 8, 2020)
 p1.display()
 p2 = Person("xyz", 6, 27, 2, 2024)
 p2.display()
-'''
 
 #demonstration of inner class
 class Person:
