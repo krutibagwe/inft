@@ -19,3 +19,4 @@ class Student(Person):
        
 s1 = Student("ABC", "def", "A")
 s1.printname()
+
