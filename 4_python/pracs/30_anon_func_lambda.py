@@ -1,20 +1,19 @@
 # To implement a python program to demonstrate anonymous functions (lambda,map,reduce,filter)
 
 from functools import reduce
-numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-print("Original numbers:", numbers)
+
+numbers = [1,2,3,4,5,6,7,8,9,10]
+print("Original numbers: ", numbers)
 print()
-#reduce with a lambda function to find the sum of numbers
-sum_result = reduce(lambda x, y: x + y, numbers)
-print("Sum of numbers:", sum_result)
 
-#filter with a lambda function to keep only even numbers
-even_numbers = filter(lambda x: x % 2 == 0, numbers)
-even_numbers_list = list (even_numbers)
-print("Even numbers:", even_numbers_list)
+#reduce to find sum of numbers
+sum_res = reduce(lambda x, y : x + y, numbers)
+print("Sum of numbers: ", sum_res)
 
-#map with a lambda function to calculate square of a number
-squared_numbers = map(lambda x: x**2, numbers)
-squared_numbers_list = list(squared_numbers)
-print("Squared numbers:", squared_numbers_list)
+#filter to keep only even numbers
+even_num = filter(lambda x: x % 2 == 0, numbers)
+print("Even numbers: ", list(even_num))
 
+#map to calculate square of numbers
+squared_num = map(lambda x: x **2, numbers)
+print("Squared numbers: ", list(squared_num))
