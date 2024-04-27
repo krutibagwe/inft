@@ -6,7 +6,7 @@ while True:
 
         return num_str == num_str[::-1]
 
-    num = int(input("Enter a numeber: "))
+    num = int(input("Enter a number: "))
     num_str = str(num)
     print("Number in reverse order: ", num_str[::-1])
 
