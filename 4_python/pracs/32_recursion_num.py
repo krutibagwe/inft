@@ -28,6 +28,9 @@ def lcm(a, b):
         if i % smallest == 0:
             return i
 
+def lcm2(a, b):
+    return abs(a * b) // gcd(a, b)
+
 def power_of_n(base, exponent):
     # Base case: x^0 = 1
     if exponent == 0:
@@ -49,3 +52,4 @@ print("Factorial of", factorial_num, ":", factorial(factorial_num))
 print("GCD of", num1, "and", num2, ":", gcd(num1, num2))
 print("LCM of", num1, "and", num2, ":", lcm(num1, num2))
 print(base, "raised to the power of", exponent, ":", power_of_n(base, exponent))
+print("LCM of", num1, "and", num2, ":", lcm2(num1, num2))
