@@ -1,17 +1,17 @@
 #To implement a python program to define functions to handle multiple exceptions.
 
 while True:
-    print("1.Enter 1 for AssertionError: \n2.Enter 2 for ZeroDivisionError: \n3.Enter 3 for TypeError: ")
+    print("\n1.Enter 1 for AssertionError: \n2.Enter 2 for ZeroDivisionError: \n3.Enter 3 for TypeError: ")
     print("4.Enter 4 for NameError: \n5.Enter 5 for IndexError: \n6.Enter 6 to Exit\n")
     num = int(input("Enter your choice: "))
 
     if num==1:
         try:
-            n=int(input("enter number between 2 to 3:"))
-            assert n>=2 and n<=3
+            n=int(input("enter number between 2 to 4:"))
+            assert n>=2 and n<=4
             print("number entered is", n)
         except AssertionError:
-            print("Assertion Error: enter number between 2 to 5.")
+            print("Assertion Error: enter number between 2 to 4.")
 
     elif num == 2:
         a = int(input("Enter first number: "))
