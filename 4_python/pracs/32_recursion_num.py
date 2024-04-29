@@ -21,6 +21,7 @@ def gcd(a, b):
     # Recursive case: GCD(a, b) = GCD(b, a % b)
     return gcd(b, a % b)
 
+#lcm without recursion
 def lcm(a, b):
     greater = max(a, b)
     smallest = min(a, b)
