@@ -1,4 +1,4 @@
-//Server side for chat application
+// Server side for chat application
 import java.io.*;
 import java.net.*;
 class Senddata{
