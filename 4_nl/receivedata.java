@@ -1,4 +1,4 @@
-//Client side for chat application 
+// Client side for chat application 
 
 import java.io.*;
 import java.net.*;
