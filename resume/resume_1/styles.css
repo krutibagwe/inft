@@ -1,4 +1,4 @@
-/* Apply global styles */
+
 body {
     font-family: 'Roboto', sans-serif;
     color: #333;
@@ -48,46 +48,22 @@ h1 {
 }
 
 h3 {
-    color: #fafafa;
+    color: #ffffff;
     background: #003366;
     padding: 10px;
     border-radius: 5px;
-    font-size: 1.8em;
-    margin: 0;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    font-size: 1.6em;
 }
 
 h4 {
     color: #003366;
     font-size: 1.4em;
-    margin: 10px 0 5px 0;
-}
-
-.contact-info {
-    margin: 20px 0;
-}
-
-.contact-info a {
-    color: #003366;
-    margin: 0 10px;
-    font-size: 1.5em;
-    text-decoration: none;
-}
-
-.contact-info a:hover {
-    color: #00509e;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin: 10px 0;
 }
 
 a {
-    color: #003366;
+    color: #0056b3;
     text-decoration: none;
 }
 
@@ -95,12 +71,52 @@ a:hover {
     text-decoration: underline;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li a {
+    color: #007bff;
+}
+
+ul li a:hover {
+    text-decoration: underline;
+}
+
 hr {
     border: 0;
-    border-top: 2px solid #003366;
+    border-top: 1px solid #dbe2e8;
     margin: 20px 0;
 }
 
-p {
-    margin: 0 0 20px 0;
+.sidebar .contact-info {
+    margin-bottom: 20px;
+}
+
+.sidebar .contact-info a {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.sidebar .contact-info {
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    margin-bottom: 20px;
+}
+
+.sidebar .contact-info a {
+    color: #003366;
+    font-size: 1.5em; 
+    text-decoration: none;
+}
+
+.sidebar .contact-info a:hover {
+    color: #00509e; 
 }
