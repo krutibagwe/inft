@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>Area Calculator</title>
+    </head>
+    <body>
+        <script>
+            class Calculator {
+                constructor(length, width) {
+                    this.length = length;
+                    this.width = width;
+                }
+            }
+
+            class RectArea extends Calculator {
+                constructor(length, width, radius) {
+                    super(length, width);
+                    this.radius = radius;
+                }
+
+                displayRectArea() {
+                    let area = this.length * this.width;
+                    document.write("Rectangle Area: " + area + "<br>");
+                }
+            }
+
+            class CircleArea extends RectArea {
+                constructor(length, width, radius) {
+                    super(length, width, radius);
+                }
+
+                displayCircleArea() {
+                    let area = Math.PI * Math.pow(this.radius, 2);
+                    document.write("Circle Area: " + area + "<br>");
+                }
+            }
+
+            const rectangle = new RectArea(10, 5);
+            rectangle.displayRectArea();
+
+            const circle = new CircleArea(0, 0, 7);
+            circle.displayCircleArea();
+        </script>
+    </body>
+</html>
