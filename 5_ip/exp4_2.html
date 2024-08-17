@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Exp4 </title>
+    </head>
+
+    <body>
+
+        <script>
+            class AccHolder{
+                constructor(accno,name,age,bal){
+                    this.accno = accno;
+                    this.name = name;
+                    this.age = age;
+                    this.bal = bal;
+            }
+            display(){
+                document.write("Account number is "+ this.accno + "<br>");
+                document.write("Name is "+ this.name + "<br>");
+                document.write("Age is " + this.age + "<br>");
+                document.write("Balance is " + this.bal + "<br>");
+            }
+        }
+        const acc1 = new AccHolder(101, "kruti", 20, 5000);
+        acc1.display();
+        document.write("<hr>");
+        const acc2 = new AccHolder(102, "abc", 35, 8000);
+        acc2.display();
+
+        </script>
+    </body>
+</html>
