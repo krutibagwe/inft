@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>EXP 4</title>
+    </head>
+
+    <body>
+        <p id = "demo1"> </p>
+        <p id = "demo2"> </p>
+        <p id = "demo3"> </p>
+        <p id = "demo4"> </p>
+        <p id = "demo5"> </p>
+
+        <script>
+            let hello = () => {
+            let x = prompt("Enter the name: ");
+            return "Hello " + x;
+            }
+    document.getElementById("demo1").innerHTML=hello();
+
+           let area = (b,h) => {
+                let area = (b*h)/2;
+                
+                return "Base: " + b + " Height: " + h + "<br>" + " Area of triangle is " + area;
+            }
+            document.getElementById("demo2").innerHTML=area(8,2);
+
+            let divisible = (x) => (x%2==0 ?  x + " is even." :  x + " is odd.");
+            let num = prompt("Enter a number: ");
+            document.getElementById("demo3").innerHTML=divisible(num);
+
+            let arr1 = [1, 2, 3, 4, 5, 6, 7];
+
+            let largest = (arr) => {
+                let max = arr[0]; 
+                for (let i = 1; i < arr.length; i++) {
+                    if (arr[i] > max) {
+                        max = arr[i]; 
+                    }
+                }
+                return "Array elements: " + arr.join(", ") + "<br>Largest number in array is " + max;
+            };
+            document.getElementById("demo4").innerHTML = largest(arr1); 
+            
+            const factorial = n => (n <= 1 ? 1 : n * factorial(n - 1));
+        
+            let number = parseInt(prompt("Enter a number to calculate its factorial: "), 10);
+            let factorialResult = factorial(number);
+            document.getElementById("demo5").innerHTML = "Factorial of " + number + " is " + factorialResult;
+        </script>
+    </body>
+</html>
