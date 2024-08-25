@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXP 4</title>
+</head>
+<body>
+    <p id="output"></p>
+
+    <script>
+        // Class to represent an account holder
+        class Accholder {
+            constructor(accnum, name, age, balance) {
+                this.accnum = accnum;
+                this.name = name;
+                this.age = age;
+                this.balance = balance;
+            }
+
+            display() {
+                return `Account Number: ${this.accnum}<br>Name: ${this.name}<br>Age: ${this.age}<br>Balance: ${this.balance}<br><br>`;
+            }
+        }
+
+        // Parent class for calculator
+        class Calculator {
+            constructor(length, width) {
+                this.length = length;
+                this.width = width;
+            }
+        }
+
+        // Derived class for rectangle area
+        class RectArea extends Calculator {
+            constructor(length, width) {
+                super(length, width); // Call the parent constructor
+            }
+
+            areaOfRectangle() {
+                return this.length * this.width;
+            }
+        }
+
+        // Further derived class for circle area
+        class CircleArea extends RectArea {
+            constructor(length, width, radius) {
+                super(length, width); // Call the parent constructor
+                this.radius = radius;
+            }
+
+            areaOfCircle() {
+                return Math.PI * this.radius * this.radius;
+            }
+        }
+
+        // Function to display account holder details
+        const displayAccholderDetails = () => {
+            const acc1 = new Accholder(101, 'Kruti Bagwe', 20, 5000);
+            const acc2 = new Accholder(102, 'Alice', 58, 9000);
+            return acc1.display() + acc2.display();
+        };
+
+        // Function to display areas
+        const displayAreas = () => {
+            const rect = new RectArea(10, 5);
+            const circle = new CircleArea(0, 0, 10);
+            return `Area of Rectangle: ${rect.areaOfRectangle()}<br>Area of Circle: ${circle.areaOfCircle()}`;
+        };
+
+        // Function to display the menu and get user choice
+        const menu = () => {
+            return prompt(
+                "Choose an option:\n" +
+                "1. Display account holder details\n" +
+                "2. Calculate areas of rectangle and circle\n" +
+                "3. Exit"
+            );
+        };
+
+        // Prompt user for choice and execute action
+        const executeChoice = () => {
+            let choice = menu();
+            let output = "";
+
+            switch (choice) {
+                case '1':
+                    output = displayAccholderDetails();
+                    break;
+                case '2':
+                    output = displayAreas();
+                    break;
+                case '3':
+                    alert("Exiting the program.");
+                    break;
+                default:
+                    output = "Invalid choice. Please refresh the page and select a valid option.";
+                    break;
+            }
+
+            document.getElementById("output").innerHTML = output;
+        };
+
+        // Execute the choice function
+        executeChoice();
+    </script>
+</body>
+</html>
