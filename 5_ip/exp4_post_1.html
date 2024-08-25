@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Driven Program</title>
+    <style>
+        /* Simple styling to make the output more readable */
+        p {
+            font-family: Arial, sans-serif;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+
+    <script>
+        // Function to display a table of numbers up to a given number
+        const displayTable = (n) => {
+            let result = "";
+            for (let j = 1; j <= 10; j++) {
+                result += `${n} x ${j} = ${n * j}<br>`;
+            }
+            return result;
+        };
+
+        // Function to print Fibonacci series up to a given number of elements
+        const fibonacciSeries = (num) => {
+            let fib = [0, 1];
+            for (let i = 2; i < num; i++) {
+                fib.push(fib[i - 1] + fib[i - 2]);
+            }
+            return `Fibonacci Series: ${fib.join(", ")}`;
+        };
+
+        // Function to check if a year is a leap year
+        const isLeapYear = (year) => {
+            return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0)
+                ? `${year} is a leap year.`
+                : `${year} is not a leap year.`;
+        };
+
+        // Function to check if a number is a perfect number
+        const isPerfectNumber = (num) => {
+            let sum = 0;
+            for (let i = 1; i <= num / 2; i++) {
+                if (num % i === 0) {
+                    sum += i;
+                }
+            }
+            return sum === num
+                ? `${num} is a perfect number.`
+                : `${num} is not a perfect number.`;
+        };
+
+        // Function to display the menu and get user choice
+        const menu = () => {
+            return prompt(
+                "Choose an option:\n" +
+                "1. Display the table of a number\n" +
+                "2. Print Fibonacci series up to 7 numbers\n" +
+                "3. Check if a year is a leap year\n" +
+                "4. Check if a number is a perfect number\n" +
+                "5. Exit"
+            );
+        };
+
+        // Prompt user for choice and execute action
+        const executeChoice = () => {
+            let choice = menu();
+
+            switch (choice) {
+                case '1':
+                    let numTable = parseInt(prompt("Enter the number to display the table: "), 10);
+                    document.getElementById("demo1").innerHTML = displayTable(numTable);
+                    break;
+                case '2':
+                    document.getElementById("demo2").innerHTML = fibonacciSeries(7);
+                    break;
+                case '3':
+                    let year = parseInt(prompt("Enter a year to check if it is a leap year: "), 10);
+                    document.getElementById("demo3").innerHTML = isLeapYear(year);
+                    break;
+                case '4':
+                    let number = parseInt(prompt("Enter a number to check if it is a perfect number: "), 10);
+                    document.getElementById("demo4").innerHTML = isPerfectNumber(number);
+                    break;
+                case '5':
+                    alert("Exiting the program.");
+                    break;
+                default:
+                    alert("Invalid choice. Please refresh the page and select a valid option.");
+                    break;
+            }
+        };
+
+        // Execute the choice function
+        executeChoice();
+    </script>
+</body>
+</html>
