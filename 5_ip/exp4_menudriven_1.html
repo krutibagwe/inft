@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EXP 4</title>
+    <style>
+        /* Simple styling to make the output more readable */
+        p {
+            font-family: Arial, sans-serif;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+    <p id="demo5"></p>
+
+    <script>
+        // Function to display the menu and get user choice
+        const menu = () => {
+            return prompt(
+                "Choose an option:\n" +
+                "1. Display greeting message\n" +
+                "2. Calculate area of a triangle\n" +
+                "3. Check if a number is even or odd\n" +
+                "4. Find largest number in an array\n" +
+                "5. Calculate factorial of a number\n" +
+                "6. Exit"
+            );
+        };
+
+        // Function to display a greeting message
+        const hello = () => {
+            let name = prompt("Enter your name: ");
+            return "Hello " + name + "!";
+        };
+
+        // Function to calculate the area of a triangle
+        const area = (base, height) => {
+            let triangleArea = (base * height) / 2;
+            return `Base: ${base}<br>Height: ${height}<br>Area of the triangle is ${triangleArea}`;
+        };
+
+        // Function to check if a number is even or odd
+        const divisible = (number) => {
+            return number % 2 === 0 ? `${number} is even.` : `${number} is odd.`;
+        };
+
+        // Function to find the largest number in an array
+        const largest = (arr) => {
+            let max = arr[0];
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                }
+            }
+            return `Array elements: ${arr.join(", ")}<br>Largest number in the array is ${max}`;
+        };
+
+        // Function to calculate the factorial of a number
+        const factorial = (n) => (n <= 1 ? 1 : n * factorial(n - 1));
+
+        // Define the array and exit flag
+        let arr1 = [1, 2, 3, 4, 5, 6, 7];
+        
+        // Prompt user for choice
+        let choice = menu();
+
+        // Execute action based on user's choice
+        switch (choice) {
+            case '1':
+                document.getElementById("demo1").innerHTML = hello();
+                break;
+            case '2':
+                let base = parseFloat(prompt("Enter the base of the triangle: "));
+                let height = parseFloat(prompt("Enter the height of the triangle: "));
+                document.getElementById("demo2").innerHTML = area(base, height);
+                break;
+            case '3':
+                let num = parseInt(prompt("Enter a number: "), 10);
+                document.getElementById("demo3").innerHTML = divisible(num);
+                break;
+            case '4':
+                document.getElementById("demo4").innerHTML = largest(arr1);
+                break;
+            case '5':
+                let number = parseInt(prompt("Enter a number to calculate its factorial: "), 10);
+                let factorialResult = factorial(number);
+                document.getElementById("demo5").innerHTML = `Factorial of ${number} is ${factorialResult}`;
+                break;
+            case '6':
+                alert("Exiting the program.");
+                break;
+            default:
+                alert("Invalid choice. Please refresh the page and select a valid option.");
+                break;
+        }
+    </script>
+</body>
+</html>
