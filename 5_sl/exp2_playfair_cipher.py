@@ -1,136 +1,131 @@
-print("\n1. Encrypt using Playfair Cipher \n2. Decrypt using Playfair Cipher")
+import re
 
-# Get user's choice for encryption or decryption
-choice = int(input("Enter your choice: "))
+# Preprocess the message by removing non-letters and converting to uppercase
+def preprocess_message(msg):
+    msg = re.sub(r'[^A-Z]', '', msg.upper())
+    msg = msg.replace('J', 'I')
+    return msg
 
-# Convert text to lowercase
-def toLowerCase(text):
-    return text.lower()
+# Construct the key square (5x5 grid) from the key
+def create_key_matrix(key_phrase):
+    key_phrase = re.sub(r'[^A-Z]', '', key_phrase.upper())
+    key_phrase += 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+    matrix = []
+    seen = set()
+    for char in key_phrase:
+        if char not in seen:
+            seen.add(char)
+            matrix.append(char)
+    return matrix
 
-# Remove all spaces from the text
-def removeSpaces(text):
-    return text.replace(" ", "")
+# Get the row and column of a character in the key square
+def locate_position(matrix, char):
+    index = matrix.index(char)
+    return divmod(index, 5)
 
-# Prepare text for encryption/decryption by formatting it into digraphs
-def prepareText(text):
-    text = removeSpaces(toLowerCase(text))  # Remove spaces and convert to lowercase
-    prepared_text = []
-    i = 0
-    while i < len(text):
-        # Add a letter to the prepared text
-        prepared_text.append(text[i])
-        if i + 1 < len(text):
-            # If the next letter is the same, add a bogus letter 'x' between them
-            if text[i] == text[i + 1]:
-                prepared_text.append('x')
-            else:
-                # Add the next letter if it's different
-                prepared_text.append(text[i + 1])
-            i += 2  # Move to the next pair of letters
-        else:
-            i += 1
-    # Handle odd length by adding a bogus letter at the end
-    if len(prepared_text) % 2 != 0:
-        prepared_text.append('x')
-    return ''.join(prepared_text)
-
-# Generate the key table used for encryption/decryption
-def generateKeyTable(key):
-    key = toLowerCase(key).replace('j', 'i')  # Treat 'j' as 'i'
-    key = ''.join(sorted(set(key), key=key.index))  # Remove duplicates, preserve order
-    list1 = 'abcdefghiklmnopqrstuvwxyz'
-    table = ''.join(sorted(set(list1) - set(key)))  # Add missing letters
-    return [list(key + table)[i:i + 5] for i in range(0, 25, 5)]  # Create a 5x5 matrix
-
-# Print the key table matrix
-def printMatrix(matrix):
-    print("Key Table Matrix:")
-    for row in matrix:
-        print(' '.join(row))
-    print()
-
-# Find the position of a character in the matrix
-def search(matrix, char):
-    for i, row in enumerate(matrix):
-        if char in row:
-            return i, row.index(char)
-    raise ValueError(f"Character {char} not found in the matrix.")
-
-# Encrypt the text using the Playfair cipher
-def encrypt(matrix, text):
-    def getPair(x1, y1, x2, y2):
-        # Find the encrypted pair based on their positions
-        if x1 == x2:
-            return matrix[x1][(y1 + 1) % 5] + matrix[x2][(y2 + 1) % 5]
-        elif y1 == y2:
-            return matrix[(x1 + 1) % 5][y1] + matrix[(x2 + 1) % 5][y2]
-        else:
-            return matrix[x1][y2] + matrix[x2][y1]
+# Encrypt the plaintext using the Playfair cipher technique
+def playfair_encrypt(plain_text, key_phrase):
+    plain_text = preprocess_message(plain_text)
+    matrix = create_key_matrix(key_phrase)
     
-    # Split the text into digraphs (pairs of letters)
-    digraphs = [text[i:i + 2] for i in range(0, len(text), 2)]
-    cipher_text = ""
-    for digraph in digraphs:
-        x1, y1 = search(matrix, digraph[0])
-        x2, y2 = search(matrix, digraph[1])
-        cipher_text += getPair(x1, y1, x2, y2)  # Encrypt each pair
-    return cipher_text
-
-# Decrypt the text using the Playfair cipher
-def decrypt(matrix, text):
-    def getPair(x1, y1, x2, y2):
-        # Find the decrypted pair based on their positions
-        if x1 == x2:
-            return matrix[x1][(y1 - 1) % 5] + matrix[x2][(y2 - 1) % 5]
-        elif y1 == y2:
-            return matrix[(x1 - 1) % 5][y1] + matrix[(x2 - 1) % 5][y2]
-        else:
-            return matrix[x1][y2] + matrix[x2][y1]
-    
-    # Split the text into digraphs (pairs of letters)
-    digraphs = [text[i:i + 2] for i in range(0, len(text), 2)]
-    plain_text = ""
-    for digraph in digraphs:
-        x1, y1 = search(matrix, digraph[0])
-        x2, y2 = search(matrix, digraph[1])
-        plain_text += getPair(x1, y1, x2, y2)  # Decrypt each pair
-    
-    # Handle the removal of bogus letters
-    final_plain_text = []
+    encrypted_result = []
     i = 0
     while i < len(plain_text):
-        final_plain_text.append(plain_text[i])
-        if i + 1 < len(plain_text) and plain_text[i] == plain_text[i + 1]:
-            if plain_text[i + 1] == 'x':
-                final_plain_text.pop()  # Remove the bogus letter
-            else:
-                final_plain_text.append(plain_text[i + 1])
+        a = plain_text[i]
+        b = plain_text[i + 1] if i + 1 < len(plain_text) else 'X'
+        
+        if a == b:
+            b = 'X'
             i += 1
-        i += 1
-    return ''.join(final_plain_text).rstrip('x')
+        else:
+            i += 2
+        
+        row1, col1 = locate_position(matrix, a)
+        row2, col2 = locate_position(matrix, b)
+        
+        if row1 == row2:
+            encrypted_result.append(matrix[row1 * 5 + (col1 + 1) % 5])
+            encrypted_result.append(matrix[row2 * 5 + (col2 + 1) % 5])
+        elif col1 == col2:
+            encrypted_result.append(matrix[((row1 + 1) % 5) * 5 + col1])
+            encrypted_result.append(matrix[((row2 + 1) % 5) * 5 + col2])
+        else:
+            encrypted_result.append(matrix[row1 * 5 + col2])
+            encrypted_result.append(matrix[row2 * 5 + col1])
+    
+    return ''.join(encrypted_result)
 
-# Based on the user's choice, either encrypt or decrypt the text
-if choice == 1:
-    text_plain = input("Enter the plain text: ")
-    key = input("Enter the key: ")
-    matrix = generateKeyTable(key)  # Generate key table matrix
-    printMatrix(matrix)  # Print the matrix
-    prepared_text = prepareText(text_plain)
-    cipher_text = encrypt(matrix, prepared_text)  # Encrypt the text
-    # Display results
-    print("Key text:", key)
-    print("Plain Text:", text_plain)
-    print("Cipher Text:", cipher_text)
-elif choice == 2:
-    text_cipher = input("Enter the cipher text: ")
-    key = input("Enter the key: ")
-    matrix = generateKeyTable(key)  # Generate key table matrix
-    printMatrix(matrix)  # Print the matrix
-    prepared_text = removeSpaces(toLowerCase(text_cipher))
-    plain_text = decrypt(matrix, prepared_text)  # Decrypt the text
-    # Display results
-    print("Key text:", key)
-    print("Cipher Text:", text_cipher)
-    print("Plain Text:", plain_text)
-else:
-    print("Invalid choice.")  # Handle invalid choices
+# Decrypt the ciphertext using the Playfair cipher technique
+def playfair_decrypt(cipher_text, key_phrase):
+    matrix = create_key_matrix(key_phrase)
+    
+    decrypted_result = []
+    for i in range(0, len(cipher_text), 2):
+        a = cipher_text[i]
+        b = cipher_text[i + 1]
+        
+        row1, col1 = locate_position(matrix, a)
+        row2, col2 = locate_position(matrix, b)
+        
+        if row1 == row2:
+            decrypted_result.append(matrix[row1 * 5 + (col1 - 1) % 5])
+            decrypted_result.append(matrix[row2 * 5 + (col2 - 1) % 5])
+        elif col1 == col2:
+            decrypted_result.append(matrix[((row1 - 1) % 5) * 5 + col1])
+            decrypted_result.append(matrix[((row2 - 1) % 5) * 5 + col2])
+        else:
+            decrypted_result.append(matrix[row1 * 5 + col2])
+            decrypted_result.append(matrix[row2 * 5 + col1])
+    
+    return ''.join(decrypted_result)
+
+# Display the key square matrix
+def show_key_matrix(matrix):
+    print("Key Square Matrix:")
+    for i in range(5):
+        print(' '.join(matrix[i * 5:(i + 1) * 5]))
+
+# Main function to handle user interaction
+def main():
+    while True:
+        print("\nMenu:")
+        print("1. Encryption")
+        print("2. Decryption")
+        print("3. Exit")
+        choice = input("Enter your choice: ").strip()
+        
+        if choice == '1':
+            text = input("Enter the plaintext: ")
+            key_phrase = input("Enter the key: ")
+            
+            processed_text = preprocess_message(text)
+            key_matrix = create_key_matrix(key_phrase)
+            
+            print("\nProcessed Plaintext:", processed_text)
+            show_key_matrix(key_matrix)
+            
+            encrypted_message = playfair_encrypt(processed_text, key_phrase)
+            print("\nEncrypted Message:", encrypted_message)
+        
+        elif choice == '2':
+            text = input("Enter the ciphertext: ")
+            key_phrase = input("Enter the key: ")
+            
+            processed_text = preprocess_message(text)
+            key_matrix = create_key_matrix(key_phrase)
+            
+            print("\nProcessed Ciphertext:", processed_text)
+            show_key_matrix(key_matrix)
+            
+            decrypted_message = playfair_decrypt(processed_text, key_phrase)
+            print("\nDecrypted Message:", decrypted_message)
+        
+        elif choice == '3':
+            print("Exiting the program.")
+            break
+        
+        else:
+            print("Invalid option! Please try again.")
+
+if __name__ == '__main__':
+    main()
