@@ -1,0 +1,107 @@
+//public/manifest.json
+{
+  "name": "E-Shop",
+  "short_name": "E-Shop",
+  "description": "A responsive Progressive Web App for e-commerce shopping",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1976d2",
+  "orientation": "portrait",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+//service-worker.js
+// service-worker.js
+
+const CACHE_NAME = 'eshop-cache-v1';
+const urlsToCache = [
+  '/',
+  '/index.html',
+  '/manifest.json',
+  '/favicon.ico',
+  '/static/js/bundle.js',
+  '/static/js/main.chunk.js',
+  '/static/js/0.chunk.js',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png'
+];
+
+// Install Service Worker
+self.addEventListener('install', event => {
+  console.log('[Service Worker] Installing...');
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('[Service Worker] Caching all content');
+      return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+// Activate Service Worker
+self.addEventListener('activate', event => {
+  console.log('[Service Worker] Activated!');
+  event.waitUntil(
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            console.log('[Service Worker] Deleting old cache:', key);
+            return caches.delete(key);
+          }
+        })
+      )
+    )
+  );
+});
+
+// Fetch Data from Cache or Network
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
