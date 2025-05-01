@@ -1,0 +1,157 @@
+// src/components/Navbar.js
+import React from "react";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          E-Shop
+        </Typography>
+        <Button color="inherit" component={Link} to="/">
+          Home
+        </Button>
+        <Button color="inherit" component={Link} to="/products">
+          Products
+        </Button>
+        <Button color="inherit" component={Link} to="/contact">
+          Contact
+        </Button>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Navbar;
+
+// src/components/ProductCard.js
+import React from "react";
+import { Card, CardMedia, CardContent, Typography, Button } from "@mui/material";
+
+const ProductCard = ({ product }) => {
+  return (
+    <Card sx={{ maxWidth: 345, margin: 2 }}>
+      <CardMedia component="img" height="200" image={product.image} alt={product.name} />
+      <CardContent>
+        <Typography variant="h6">{product.name}</Typography>
+        <Typography color="text.secondary">${product.price}</Typography>
+        <Button variant="contained" color="primary">
+          Buy Now
+        </Button>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default ProductCard;
+
+// src/pages/Contact.js
+import React from "react";
+import { Container, Typography, TextField, Button, Box } from "@mui/material";
+
+const Contact = () => {
+  return (
+    <Container maxWidth="sm" sx={{ mt: 5 }}>
+      <Typography variant="h4" gutterBottom>
+        Contact Us
+      </Typography>
+      <Typography variant="body1" color="text.secondary" paragraph>
+        We'd love to hear from you. Fill out the form below and we'll get back to you shortly.
+      </Typography>
+      <Box component="form" noValidate autoComplete="off">
+        <TextField
+          label="Name"
+          fullWidth
+          margin="normal"
+          required
+        />
+        <TextField
+          label="Email"
+          type="email"
+          fullWidth
+          margin="normal"
+          required
+        />
+        <TextField
+          label="Message"
+          multiline
+          rows={4}
+          fullWidth
+          margin="normal"
+          required
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+        >
+          Send Message
+        </Button>
+      </Box>
+    </Container>
+  );
+};
+
+export default Contact;
+
+// src/pages/Home.js
+
+import React from "react";
+import { Container, Typography, Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+
+const Home = () => {
+  return (
+    <Container maxWidth="md" sx={{ textAlign: "center", mt: 5 }}>
+      <Typography variant="h3" gutterBottom>
+        Welcome to E-Shop
+      </Typography>
+      <Typography variant="h6" color="text.secondary" paragraph>
+        Your one-stop online store for the latest electronics and gadgets.
+        Discover amazing deals and trending products.
+      </Typography>
+      <Box sx={{ mt: 4 }}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          component={Link}
+          to="/products"
+        >
+          Browse Products
+        </Button>
+      </Box>
+    </Container>
+  );
+};
+
+export default Home;
+
+
+// src/pages/Products.js
+import React from "react";
+import ProductCard from "../components/ProductCard";
+import { Grid } from "@mui/material";
+
+const products = [
+  { id: 1, name: "Smartphone", price: 299, image: "https://via.placeholder.com/150" },
+  { id: 2, name: "Laptop", price: 799, image: "https://via.placeholder.com/150" },
+  { id: 3, name: "Headphones", price: 49, image: "https://via.placeholder.com/150" },
+];
+
+const Products = () => {
+  return (
+    <Grid container spacing={2} justifyContent="center">
+      {products.map((product) => (
+        <Grid item key={product.id}>
+          <ProductCard product={product} />
+        </Grid>
+      ))}
+    </Grid>
+  );
+};
+
+export default Products;
