@@ -1,3 +1,7 @@
+npm install @mui/material @emotion/react @emotion/styled react-router-dom@6
+npm run build
+serve -s build
+
 //public/manifest.json
 {
   "name": "E-Shop",
